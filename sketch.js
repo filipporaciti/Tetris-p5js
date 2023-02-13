@@ -1,16 +1,67 @@
 const canvasWidth = 600
 const canvasHeight = 600
+const timeInterval = 1000
 
-let box
-
+let item
+let press = false
 
 
 function setup() {
-    createCanvas(canvasWidth, canvasHeight);
-    box = new TetrisRect(10, 10, 30, {r:110, g:110, b:110})
+    let canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.position(windowWidth/2-width/2, 100)
+    items = new allItems()
+    item = new FigureItem(width/2-60, 0)
+    items.addItem(item)
+    setInterval(() => itemGravityMovement(), timeInterval) // il setInterval esegue un'azione ogni "timer" millisecondi
   }
   
-  function draw() {
-    background(200);
-    box.show()
+function draw() {
+  background(200);
+  items.show()
+  itemXaxisMovement()
+}
+
+
+
+
+
+function windowResized() {
+  let canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.position(windowWidth/2-width/2, 100)
+}
+
+
+
+
+function itemXaxisMovement(){
+  if(keyIsPressed == true){
+    console.log(key)
+    if (key == "ArrowLeft" && !press) {
+      item.move('l')
+    }
+    if (key == "ArrowRight" && !press) {
+      item.move('r')
+    }
+    if (key == "ArrowDown" && !press) {
+      item.move('b')
+    }
+    if (key == "Shift" && !press) {
+      item.rotateItem()
+    }
+    press = true
+  }else{
+    press = false
   }
+
+}
+
+
+
+let itemGravityMovement = () => {
+  if(item.y < height-item.getBottomBlock()){
+    item.y += side
+  }else{
+    item = new FigureItem(width/2-60, 0)
+    items.addItem(item)
+  }
+}
