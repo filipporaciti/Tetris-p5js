@@ -8,16 +8,12 @@ class TetrisRect{
         this.y = y
         this.color = color
         this.side = side
-
-        
-
     }
 
     show() {
         fill(this.color["r"], this.color["g"], this.color["b"])
-        rect(this.x, this.y, this.side, this.side)
-        
-
+        strokeWeight(1.5)
+        rect(this.x, this.y, this.side, this.side, 1)
     }
 
 }

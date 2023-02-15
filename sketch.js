@@ -22,6 +22,7 @@ function draw() {
   background(200);
   items.show()
   itemXaxisMovement()
+  items.collide(item)
 }
 
 
@@ -57,8 +58,9 @@ function itemXaxisMovement(){
 
 
 
+
 let itemGravityMovement = () => {
-  if(item.y < height-item.getBottomBlock()){
+  if(item.bottomBlock(item.pattern)){
     item.y += side
   }else{
     item = new FigureItem(width/2-60, 0)
@@ -66,7 +68,6 @@ let itemGravityMovement = () => {
   }
 
   document.getElementById("score").innerHTML = score
-  
-}
 
+}
 

@@ -35,15 +35,16 @@ class FigureItem{
     }
 
     rotateItem(){
-        if(this.y < height-this.getBottomBlock()-side){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
-            let newPatt = [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-            for(let row=0; row < this.pattern.length; row ++){
-                for(let col=0; col < this.pattern[row].length; col ++){
-                    newPatt[row][col] = this.pattern[col][3-row]
-                }
+        let newPatt = [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+        for(let row=0; row < this.pattern.length; row ++){
+            for(let col=0; col < this.pattern[row].length; col ++){
+                newPatt[row][col] = this.pattern[col][3-row]
             }
+        }
+        if(this.bottomBlock(newPatt)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
             this.pattern = newPatt
         }
+        
 
     }
 
@@ -52,20 +53,32 @@ class FigureItem{
             this.x -= side
         }else if(direction == 'r' && this.x < width-this.getRightBlock()){
             this.x += side
-        }else if(direction == 'b' && this.y < height-this.getBottomBlock()){
+        }else if(direction == 'b' && this.bottomBlock(this.pattern)){
             this.y += side
         }
     }
 
-    getBottomBlock(){
-        let block = 0
-        for(let row=0; row < this.pattern.length; row ++){
-            if(this.pattern[row].indexOf(1) != -1){
-                block += side
+    
+
+    bottomBlock(p){
+        let noStop = true
+
+        for(let row=0; row < p.length; row ++){
+            for(let col=0; col < p[row].length; col ++){
+                if(p[row][col] == 1){
+                    if (this.y+(row*side)+side+side > height){
+                        noStop = false
+                    }
+
+                }
             }
         }
-        return block
+
+        return noStop
+
     }
+
+
 
 
     
