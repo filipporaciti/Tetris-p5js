@@ -1,9 +1,11 @@
 const canvasWidth = 600
 const canvasHeight = 600
-const timeInterval = 1000
+const timeInterval = 900
 
 let item
 let press = false
+
+let score = 0
 
 
 function setup() {
@@ -13,6 +15,7 @@ function setup() {
     item = new FigureItem(width/2-60, 0)
     items.addItem(item)
     setInterval(() => itemGravityMovement(), timeInterval) // il setInterval esegue un'azione ogni "timer" millisecondi
+    score = 0
   }
   
 function draw() {
@@ -20,9 +23,6 @@ function draw() {
   items.show()
   itemXaxisMovement()
 }
-
-
-
 
 
 function windowResized() {
@@ -64,4 +64,9 @@ let itemGravityMovement = () => {
     item = new FigureItem(width/2-60, 0)
     items.addItem(item)
   }
+
+  document.getElementById("score").innerHTML = score
+  
 }
+
+
