@@ -1,5 +1,5 @@
 
-document.getElementById("name-input").value = 'fsjfjodi'
+//document.getElementById("name-input").value = document.cookie.split(';')[0]
 
 
 
