@@ -41,7 +41,7 @@ class FigureItem{
                 newPatt[row][col] = this.pattern[col][3-row]
             }
         }
-        if(this.bottomBlock(newPatt)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
+        if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
             this.pattern = newPatt
         }
         
@@ -49,16 +49,41 @@ class FigureItem{
     }
 
     move(direction){
-        // if(direction == 'l' && this.x > 0-this.getLeftBlock()){
-        if(direction == 'l' && this.leftBlock(this.pattern)){
+        if(direction == 'l' && this.leftBlock(this.pattern, side)){
             this.x -= side
-        }else if(direction == 'r' && this.x < width-this.getRightBlock()){
+        }else if(direction == 'r' && this.rightBlock(this.pattern, side)){
             this.x += side
         }else if(direction == 'b' && this.bottomBlock(this.pattern)){
             this.y += side
         }
     }
 
+    rightBlock(p, controllo){ 
+        for(let row=0; row < p.length; row ++){
+            for(let col=0; col < p[row].length; col ++){
+                if(p[row][col] == 1){
+                    if (this.x+(col*side)+controllo > width-2){ // il -2 è pk la larghezza del canvas è un pizel piu lungo
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
+
+
+    leftBlock(p, controllo){ 
+        for(let row=0; row < p.length; row ++){
+            for(let col=0; col < p[row].length; col ++){
+                if(p[row][col] == 1){
+                    if (this.x+(col*side)-controllo < 0){
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
     
 
     bottomBlock(p){
@@ -74,7 +99,6 @@ class FigureItem{
         // }
         // return true
 
-
         // Altra versione
         for(let row=0; row < p.length; row ++){
                 if(p[row].indexOf(1) != -1){
@@ -86,56 +110,6 @@ class FigureItem{
             }
         
         return true
-    }
-
-    leftBlock(p){ 
-        for(let row=0; row < p.length; row ++){
-            for(let col=0; col < p[row].length; col ++){
-                if(p[row][col] == 1){
-                    if (this.x+(col*side)-side < 0){
-                        return false
-                    }
-
-                }
-            }
-        }
-        return true
-    }
-
-
-
-
-    
-    /* getLeftBlock(){
-        let block = 0
-        if(this.pattern[0][0] || this.pattern[1][0] || this.pattern[2][0] || this.pattern[3][0]){
-            block = 0
-        }else if(this.pattern[0][1] || this.pattern[1][1] || this.pattern[2][1] || this.pattern[3][1]){
-            block += side
-        }else if(this.pattern[0][2] || this.pattern[1][2] || this.pattern[2][2] || this.pattern[3][2]){
-            block += side
-        }else if(this.pattern[0][3] || this.pattern[1][3] || this.pattern[2][3] || this.pattern[3][3]){
-            block += side
-        }
-
-        return block
-    } */
-    
-    getRightBlock(){
-        let block = 0
-        if(this.pattern[0][0] || this.pattern[1][0] || this.pattern[2][0] || this.pattern[3][0]){
-            block = 30
-        }
-        if(this.pattern[0][1] || this.pattern[1][1] || this.pattern[2][1] || this.pattern[3][1]){
-            block = 60
-        }
-        if(this.pattern[0][2] || this.pattern[1][2] || this.pattern[2][2] || this.pattern[3][2]){
-            block = 90
-        }
-        if(this.pattern[0][3] || this.pattern[1][3] || this.pattern[2][3] || this.pattern[3][3]){
-            block = 120
-        }
-        return block
     }
 
 }
