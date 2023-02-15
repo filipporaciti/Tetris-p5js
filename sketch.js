@@ -1,5 +1,5 @@
-const canvasWidth = 600
-const canvasHeight = 600
+const canvasWidth = 601
+const canvasHeight = 601
 const timeInterval = 900
 
 let item
@@ -22,7 +22,7 @@ function draw() {
   background(200);
   items.show()
   itemXaxisMovement()
-  items.collide(item)
+  // items.collide(item)
 }
 
 
@@ -36,7 +36,7 @@ function windowResized() {
 
 function itemXaxisMovement(){
   if(keyIsPressed == true){
-    console.log(key)
+
     if (key == "ArrowLeft" && !press) {
       item.move('l')
     }

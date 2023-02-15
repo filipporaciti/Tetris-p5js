@@ -49,7 +49,8 @@ class FigureItem{
     }
 
     move(direction){
-        if(direction == 'l' && this.x > 0-this.getLeftBlock()){
+        // if(direction == 'l' && this.x > 0-this.getLeftBlock()){
+        if(direction == 'l' && this.leftBlock(this.pattern)){
             this.x -= side
         }else if(direction == 'r' && this.x < width-this.getRightBlock()){
             this.x += side
@@ -61,28 +62,51 @@ class FigureItem{
     
 
     bottomBlock(p){
-        let noStop = true
+        // for(let row=0; row < p.length; row ++){
+        //     for(let col=0; col < p[row].length; col ++){
+        //         if(p[row][col] == 1){
+        //             if (this.y+(row*side)+side+side > height){
+        //                 return false
+        //             }
 
+        //         }
+        //     }
+        // }
+        // return true
+
+
+        // Altra versione
+        for(let row=0; row < p.length; row ++){
+                if(p[row].indexOf(1) != -1){
+                    if (this.y+(row*side)+side+side > height){
+                        return false
+                    }
+
+                }
+            }
+        
+        return true
+    }
+
+    leftBlock(p){ 
         for(let row=0; row < p.length; row ++){
             for(let col=0; col < p[row].length; col ++){
                 if(p[row][col] == 1){
-                    if (this.y+(row*side)+side+side > height){
-                        noStop = false
+                    if (this.x+(col*side)-side < 0){
+                        return false
                     }
 
                 }
             }
         }
-
-        return noStop
-
+        return true
     }
 
 
 
 
     
-    getLeftBlock(){
+    /* getLeftBlock(){
         let block = 0
         if(this.pattern[0][0] || this.pattern[1][0] || this.pattern[2][0] || this.pattern[3][0]){
             block = 0
@@ -95,7 +119,7 @@ class FigureItem{
         }
 
         return block
-    }
+    } */
     
     getRightBlock(){
         let block = 0
