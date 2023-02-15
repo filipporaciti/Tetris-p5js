@@ -14,7 +14,7 @@ class TetrisRect{
     }
 
     show() {
-        fill(100)
+        fill(this.color["r"], this.color["g"], this.color["b"])
         rect(this.x, this.y, this.side, this.side)
         
 

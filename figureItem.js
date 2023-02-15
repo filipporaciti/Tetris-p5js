@@ -3,16 +3,18 @@
 class FigureItem{
     constructor(x, y){
         this.pattern = [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-        this.randomPattern()
         this.x = x
         this.y = y
+        this.color = {r:200,g:0,b:0}
+        this.randomPattern()
+
     }
 
     show(){
         for(let row=0; row < this.pattern.length; row ++){
             for(let col=0; col < this.pattern[row].length; col ++){
                 if(this.pattern[row][col] == 1){
-                    let r = new TetrisRect(this.x+(col*side),this.y+(row*side),{r:200,g:0,b:0})
+                    let r = new TetrisRect(this.x+(col*side),this.y+(row*side),this.color)
                     r.show()
                 }
             }
@@ -21,13 +23,15 @@ class FigureItem{
 
     randomPattern(){
         let patt = [
-            [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
-            [[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
-            [[1, 0, 0, 0], [1, 0, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0]],
-            [[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]],
-            [[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+            [[[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], {r:0, g:0, b:255}],
+            [[[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], {r:255, g:255, b:0}],
+            [[[1, 0, 0, 0], [1, 0, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0]], {r:0, g:255, b:0}],
+            [[[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]], {r:0, g:255, b:230}],
+            [[[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], {r:255, g:165, b:0}]
         ]
-        this.pattern = random(patt)
+        let randomItem = random(patt)
+        this.pattern = randomItem[0]
+        this.color = randomItem[1]
     }
 
     rotateItem(){
