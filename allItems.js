@@ -23,8 +23,9 @@ class allItems{
                                     for(let col=0; col < it.pattern[row].length; col ++){
                                         if(it.pattern[row][col] == 1){
                                         // let r = new TetrisRect(this.x+(col*side),this.y+(row*side),{r:200,g:0,b:0})
-                                            // console.log(item.y)
+                                            // console.log(item.y+(row*side))
                                             // console.log(it.y+(row*side))
+                                            document.getElementById("score").innerHTML = it.y+(row*side)
                                             if(item.y+(row*side) > it.y+(row*side)){
                                                 console.log('false')
                                             }
