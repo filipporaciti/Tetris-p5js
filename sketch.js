@@ -1,6 +1,6 @@
 const canvasWidth = 601
 // const canvasHeight = 601
-const canvasHeight = 241
+const canvasHeight = 301
 const timeInterval = 900
 
 let item
@@ -21,9 +21,14 @@ function setup() {
   
 function draw() {
   background(200);
-  items.show()
+  
+  if (items.collide(item)){
+    item = new FigureItem(width/2-60, 0)
+    items.addItem(item)
+  }
   itemXaxisMovement()
-  items.collide(item)
+  items.show()
+
 }
 
 
