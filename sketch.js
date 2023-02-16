@@ -1,6 +1,6 @@
 const canvasWidth = 601
-// const canvasHeight = 601
-const canvasHeight = 301
+const canvasHeight = 601
+//const canvasHeight = 301
 const timeInterval = 900
 
 let item
