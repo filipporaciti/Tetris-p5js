@@ -130,6 +130,10 @@ class FigureItem{
 
     gravity(){
         if(!this.move('b')){
+            let row = items.checkWin(item)
+            if(row != -1){
+                items.deleteRow(row)
+            }
             item = new FigureItem(width/2-60, 0)
             items.addItem(item)
           }

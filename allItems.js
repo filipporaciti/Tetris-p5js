@@ -1,6 +1,11 @@
-class allItems{
+class AllItems{
     constructor(){
         this.items = []
+        this.occupati = []
+
+        for(let i=0; i<canvasHeight; i+= side){
+            this.occupati.push(Array(parseInt(canvasWidth/side)).fill(0))
+        }
     }
 
     addItem(item){
@@ -13,9 +18,41 @@ class allItems{
         }
     }
 
-    checkWin(item){
+
+
+    deleteRow(row){
+
+        
 
     }
+
+
+
+
+    checkWin(){
+      
+        for(let it of this.items){
+            for(let row=0; row < it.pattern.length; row ++){
+                for(let col=0; col < it.pattern[row].length; col ++){
+                    if(it.pattern[row][col] == 1){
+                        
+                        this.occupati[parseInt(it.y+(row*side))/side][parseInt(it.x+(col*side))/side] = 1
+                        if(this.occupati[parseInt(it.y+(row*side))/side].indexOf(0) == -1){
+                            // return parseInt(it.y+(row*side))/side
+                            return it.y+(row*side)
+                        }
+
+                    }
+                }
+            }
+        }
+        
+
+        return -1
+    }
+
+    
+
 
     collide(item){
 
@@ -32,24 +69,6 @@ class allItems{
                                         if(it.pattern[row][col] == 1){
 
 
-                                            // if(item.y+(rowItem*side)+side == it.y+(row*side)){ // to bottom chech
-                                            //     if(item.x+(colItem*side) == it.x+(col*side)){ // to right chech
-                                            //         if(item.x+(colItem*side) == it.x+(col*side)){ // to left chech
-                                            //             return true
-                                            //         }
-                                            //     }
-                                            // }
-
-
-                                            // if(item.y+(rowItem*side)+side+side > it.y+(row*side) && item.y+(rowItem*side) < it.y+(row*side)){ // to bottom chech
-                                            //     if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech
-                                            //         console.log('2222')
-                                            //         if(item.x+(colItem*side)-side < it.x+(col*side) && item.x+(colItem*side)+side > it.x+(col*side)){ // to left chech
-                                            //             return true
-                                            //         }
-                                            //     }
-                                            // }
-                                            
                                             if(item.y+(rowItem*side)+side > it.y+(row*side) && item.y+(rowItem*side)-side < it.y+(row*side)){ // to bottom chech
                                                 if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech   
                                                     if(item.x+(colItem*side)-side < it.x+(col*side) && item.x+(colItem*side)+side > it.x+(col*side)){ // to left chech
@@ -57,6 +76,8 @@ class allItems{
                                                     }
                                                 }
                                             }
+
+
                                         }
                                     }
                                 }

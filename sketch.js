@@ -16,7 +16,7 @@ let score = 0
 function setup() {
     let canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.position(windowWidth/2-width/2, 100)
-    items = new allItems()
+    items = new AllItems()
     item = new FigureItem(width/2-60, 0)
     items.addItem(item)
     gameInterval = setInterval(() => item.gravity(), timeInterval) // il setInterval esegue un'azione ogni "timer" millisecondi
@@ -27,8 +27,6 @@ function draw() {
   background(200);
   items.show()
   itemXaxisMovement()
-  items.checkWin(item)
-
 }
 
 
