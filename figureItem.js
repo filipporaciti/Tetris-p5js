@@ -32,6 +32,7 @@ class FigureItem{
         let randomItem = random(patt)
         this.pattern = randomItem[0]
         this.color = randomItem[1]
+
     }
 
     rotateItem(){
@@ -130,15 +131,9 @@ class FigureItem{
 
     gravity(){
         if(!this.move('b')){
-            let row = items.checkWin(item)
-            if(row != -1){
-                items.deleteRow(row)
-            }
             item = new FigureItem(width/2-60, 0)
             items.addItem(item)
           }
           document.getElementById("score").innerHTML = score
-
-          console.log(items.collide(item))
     }
 }

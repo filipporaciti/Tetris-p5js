@@ -1,4 +1,4 @@
-const canvasWidth = 301
+const canvasWidth = 181
 const canvasHeight = 421
 //const canvasHeight = 301
 const timeInterval = 900
@@ -27,6 +27,12 @@ function draw() {
   background(200);
   items.show()
   itemXaxisMovement()
+
+  let r = items.checkWin(item)
+  if(r != -1){
+      items.deleteRow(r)
+  }
+
 }
 
 
@@ -56,7 +62,7 @@ function itemXaxisMovement(){
     if (key == "ArrowDown" && !press) {
       item.move('b')
     }
-    if (key == "Shift" && !press) {
+    if (key == "ArrowUp" && !press) {
       item.rotateItem()
     }
     press = true

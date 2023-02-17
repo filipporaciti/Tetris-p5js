@@ -1,11 +1,6 @@
 class AllItems{
     constructor(){
         this.items = []
-        this.occupati = []
-
-        for(let i=0; i<canvasHeight; i+= side){
-            this.occupati.push(Array(parseInt(canvasWidth/side)).fill(0))
-        }
     }
 
     addItem(item){
@@ -20,7 +15,60 @@ class AllItems{
 
 
 
-    deleteRow(row){
+    deleteRow(rowDel){
+
+        for(let it of this.items){
+            for(let row=0; row < it.pattern.length; row ++){
+                for(let col=0; col < it.pattern[row].length; col ++){
+                    if(it.pattern[row][col] == 1){
+
+                        if(it.y+(row*side) == rowDel){
+                            it.pattern[row][col] = 0
+                        }
+                    }
+                }
+            }
+        }
+
+        this.show()
+        this.moveDown(rowDel)
+
+    }
+
+
+    moveDown(rowDel){
+
+        /* 
+        
+        ----------
+        ----------
+        ----------
+        ----------
+        ----------
+
+            DA CAMBIAREEEEE pk potrebbe essere che qui ci sia un bug nel quale quando il blocco va sotto, lo rimette sotto dato che la condizione è vera (non verificato)
+    
+        ----------
+        ----------
+        ----------
+        ----------
+        ----------
+        
+        
+        */
+
+        for(let it of this.items){
+            for(let row=0; row < it.pattern.length; row ++){
+                for(let col=0; col < it.pattern[row].length; col ++){
+                    if(it.pattern[row][col] == 1){
+
+                        if(it.y+(row*side) < rowDel){
+                            it.y += side
+                        }
+                    }
+                }
+            }
+        }
 
         
 
@@ -30,15 +78,28 @@ class AllItems{
 
 
     checkWin(){
+
+        this.occupati = []
+
+        for(let i=0; i<canvasHeight; i+= side){
+            this.occupati.push(Array(parseInt(canvasWidth/side)).fill(0))
+        }
       
         for(let it of this.items){
             for(let row=0; row < it.pattern.length; row ++){
                 for(let col=0; col < it.pattern[row].length; col ++){
                     if(it.pattern[row][col] == 1){
                         
-                        this.occupati[parseInt(it.y+(row*side))/side][parseInt(it.x+(col*side))/side] = 1
+                        try{
+                            this.occupati[parseInt(it.y+(row*side))/side][parseInt(it.x+(col*side))/side] = 1
+                        }catch{
+                            console.log('Erroreeeee')
+                            console.log(parseInt(it.y+(row*side))/side)
+                            console.log(parseInt(it.x+(col*side))/side)
+                            console.log(this.occupati)  
+                        }
+                        
                         if(this.occupati[parseInt(it.y+(row*side))/side].indexOf(0) == -1){
-                            // return parseInt(it.y+(row*side))/side
                             return it.y+(row*side)
                         }
 
