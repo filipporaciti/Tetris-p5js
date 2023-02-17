@@ -9,6 +9,10 @@ let press = false
 let score = 0
 
 
+
+
+
+
 function setup() {
     let canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.position(windowWidth/2-width/2, 100)
@@ -26,6 +30,20 @@ function draw() {
   items.checkWin(item)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function itemXaxisMovement(){

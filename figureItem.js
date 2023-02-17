@@ -41,10 +41,14 @@ class FigureItem{
                 newPatt[row][col] = this.pattern[col][3-row]
             }
         }
-        let newItem = item
-        newItem.pattern = newPatt
-        if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0) && !items.collide(newItem)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
+
+        let oldPatt = this.pattern // tutto questo solo per il collide
+        this.pattern = newPatt // tutto questo solo per il collide
+
+        if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0) && !items.collide(item)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
             this.pattern = newPatt
+        }else{
+            this.pattern = oldPatt
         }
         
 
@@ -52,13 +56,34 @@ class FigureItem{
 
     move(direction){    
         if(direction == 'l' && this.leftBlock(this.pattern, side)){
+            // this.x -= side
+            // if(items.collide(item)){
+            //     this.x += side
+            // }
             this.x -= side
+            if(items.collide(item)){
+                this.x += side
+                
+            }
             return true
         }else if(direction == 'r' && this.rightBlock(this.pattern, side)){
+            // this.x += side
+            // if(items.collide(item)){
+            //     this.x -= side
+            // }
             this.x += side
+            if(items.collide(item)){
+                this.x -= side
+                
+            }
             return true
-        }else if(direction == 'b' && this.bottomBlock(this.pattern) && !items.collide(item)){
+        // }else if(direction == 'b' && this.bottomBlock(this.pattern) && !items.collide(item)){
+        }else if(direction == 'b' && this.bottomBlock(this.pattern)){
             this.y += side
+            if(items.collide(item)){
+                this.y -= side
+                return false
+            }
             return true
         }
         return false
@@ -109,5 +134,7 @@ class FigureItem{
             items.addItem(item)
           }
           document.getElementById("score").innerHTML = score
+
+          console.log(items.collide(item))
     }
 }

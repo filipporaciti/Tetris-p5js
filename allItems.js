@@ -40,14 +40,23 @@ class allItems{
                                             //     }
                                             // }
 
-                                            if(item.y+(rowItem*side)+side+side > it.y+(row*side) && item.y+(rowItem*side) < it.y+(row*side)){ // to bottom chech
-                                                if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech
+
+                                            // if(item.y+(rowItem*side)+side+side > it.y+(row*side) && item.y+(rowItem*side) < it.y+(row*side)){ // to bottom chech
+                                            //     if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech
+                                            //         console.log('2222')
+                                            //         if(item.x+(colItem*side)-side < it.x+(col*side) && item.x+(colItem*side)+side > it.x+(col*side)){ // to left chech
+                                            //             return true
+                                            //         }
+                                            //     }
+                                            // }
+                                            
+                                            if(item.y+(rowItem*side)+side > it.y+(row*side) && item.y+(rowItem*side)-side < it.y+(row*side)){ // to bottom chech
+                                                if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech   
                                                     if(item.x+(colItem*side)-side < it.x+(col*side) && item.x+(colItem*side)+side > it.x+(col*side)){ // to left chech
                                                         return true
                                                     }
                                                 }
                                             }
-                                            
                                         }
                                     }
                                 }
