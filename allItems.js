@@ -13,6 +13,10 @@ class allItems{
         }
     }
 
+    checkWin(item){
+
+    }
+
     collide(item){
 
         if (this.items.length == 1){
@@ -27,8 +31,21 @@ class allItems{
                                     for(let col=0; col < it.pattern[row].length; col ++){
                                         if(it.pattern[row][col] == 1){
 
-                                            if(item.y+(rowItem*side)+side+side > it.y+(row*side)){
-                                                return true
+
+                                            // if(item.y+(rowItem*side)+side == it.y+(row*side)){ // to bottom chech
+                                            //     if(item.x+(colItem*side) == it.x+(col*side)){ // to right chech
+                                            //         if(item.x+(colItem*side) == it.x+(col*side)){ // to left chech
+                                            //             return true
+                                            //         }
+                                            //     }
+                                            // }
+
+                                            if(item.y+(rowItem*side)+side+side > it.y+(row*side) && item.y+(rowItem*side) < it.y+(row*side)){ // to bottom chech
+                                                if(item.x+(colItem*side)+side > it.x+(col*side) && item.x+(colItem*side)-side < it.x+(col*side)){ // to right chech
+                                                    if(item.x+(colItem*side)-side < it.x+(col*side) && item.x+(colItem*side)+side > it.x+(col*side)){ // to left chech
+                                                        return true
+                                                    }
+                                                }
                                             }
                                             
                                         }

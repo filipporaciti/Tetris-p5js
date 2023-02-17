@@ -41,21 +41,27 @@ class FigureItem{
                 newPatt[row][col] = this.pattern[col][3-row]
             }
         }
-        if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
+        let newItem = item
+        newItem.pattern = newPatt
+        if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0) && !items.collide(newItem)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
             this.pattern = newPatt
         }
         
 
     }
 
-    move(direction){
+    move(direction){    
         if(direction == 'l' && this.leftBlock(this.pattern, side)){
             this.x -= side
+            return true
         }else if(direction == 'r' && this.rightBlock(this.pattern, side)){
             this.x += side
-        }else if(direction == 'b' && this.bottomBlock(this.pattern)){
+            return true
+        }else if(direction == 'b' && this.bottomBlock(this.pattern) && !items.collide(item)){
             this.y += side
+            return true
         }
+        return false
     }
 
     rightBlock(p, controllo){ 
@@ -87,29 +93,21 @@ class FigureItem{
     
 
     bottomBlock(p){
-        // for(let row=0; row < p.length; row ++){
-        //     for(let col=0; col < p[row].length; col ++){
-        //         if(p[row][col] == 1){
-        //             if (this.y+(row*side)+side+side > height){
-        //                 return false
-        //             }
-
-        //         }
-        //     }
-        // }
-        // return true
-
-        // Altra versione
         for(let row=0; row < p.length; row ++){
                 if(p[row].indexOf(1) != -1){
                     if (this.y+(row*side)+side+side > height){
                         return false
                     }
-
                 }
             }
-        
         return true
     }
 
+    gravity(){
+        if(!this.move('b')){
+            item = new FigureItem(width/2-60, 0)
+            items.addItem(item)
+          }
+          document.getElementById("score").innerHTML = score
+    }
 }
