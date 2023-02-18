@@ -13,6 +13,28 @@ class AllItems{
         }
     }
 
+    gameOver(){
+
+        this.show()
+
+        if(this.collide(item)){
+            clearInterval(gameInterval)
+            alert('Game Over')
+            this.reset()
+        }
+
+
+    }
+
+    reset(){
+        items = new AllItems()
+        item = new FigureItem(spawn, 0)
+        items.addItem(item)
+        gameInterval = setInterval(() => item.gravity(), timeInterval) // il setInterval esegue un'azione ogni "timer" millisecondi
+        score = 0
+    }
+
+
 
 
     deleteRow(rowDel){
@@ -31,44 +53,29 @@ class AllItems{
         }
 
         this.show()
-        this.moveDown(rowDel)
+        this.moveRowDown(rowDel)
 
     }
 
 
-    moveDown(rowDel){
+    moveRowDown(rowDel){
 
-        /* 
-        
-        ----------
-        ----------
-        ----------
-        ----------
-        ----------
-
-            DA CAMBIAREEEEE pk potrebbe essere che qui ci sia un bug nel quale quando il blocco va sotto, lo rimette sotto dato che la condizione è vera (non verificato)
+        for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
+            for(let it of this.items){
+                for(let row=0; row < it.pattern.length; row ++){
+                    for(let col=0; col < it.pattern[row].length; col ++){
+                        if(it.pattern[row][col] == 1){
     
-        ----------
-        ----------
-        ----------
-        ----------
-        ----------
-        
-        
-        */
-
-        for(let it of this.items){
-            for(let row=0; row < it.pattern.length; row ++){
-                for(let col=0; col < it.pattern[row].length; col ++){
-                    if(it.pattern[row][col] == 1){
-
-                        if(it.y+(row*side) < rowDel){
-                            it.y += side
+                            if(it.y+(row*side) == rowToDel){
+                                it.y += side
+                            }
                         }
                     }
                 }
             }
         }
+
+       
 
         
 
@@ -79,7 +86,9 @@ class AllItems{
 
     checkWin(){
 
+
         this.occupati = []
+        let multipleDel = []
 
         for(let i=0; i<canvasHeight; i+= side){
             this.occupati.push(Array(parseInt(canvasWidth/side)).fill(0))
@@ -90,27 +99,27 @@ class AllItems{
                 for(let col=0; col < it.pattern[row].length; col ++){
                     if(it.pattern[row][col] == 1){
                         
-                        try{
-                            this.occupati[parseInt(it.y+(row*side))/side][parseInt(it.x+(col*side))/side] = 1
-                        }catch{
-                            console.log('Erroreeeee')
-                            console.log(parseInt(it.y+(row*side))/side)
-                            console.log(parseInt(it.x+(col*side))/side)
-                            console.log(this.occupati)  
-                        }
-                        
-                        if(this.occupati[parseInt(it.y+(row*side))/side].indexOf(0) == -1){
-                            return it.y+(row*side)
-                        }
+                        this.occupati[parseInt(it.y+(row*side))/side][parseInt(it.x+(col*side))/side] = 1
 
                     }
                 }
             }
         }
+
+        for(let i=0; i<parseInt(canvasHeight/side); i++){
+            if(this.occupati[i].indexOf(0) == -1){
+                multipleDel.push(i*side)
+                score += 10
+            }
+        }
         
 
-        return -1
+
+        if (multipleDel.length != 0){
+            for (let i of multipleDel) items.deleteRow(i)
+        }
     }
+
 
     
 

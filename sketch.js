@@ -1,4 +1,4 @@
-const canvasWidth = 181
+const canvasWidth = 241
 const canvasHeight = 421
 //const canvasHeight = 301
 const timeInterval = 900
@@ -8,6 +8,7 @@ let press = false
 
 let score = 0
 
+let spawn = (canvasWidth-1)/2 - side
 
 
 
@@ -17,7 +18,7 @@ function setup() {
     let canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.position(windowWidth/2-width/2, 100)
     items = new AllItems()
-    item = new FigureItem(width/2-60, 0)
+    item = new FigureItem(spawn, 0)
     items.addItem(item)
     gameInterval = setInterval(() => item.gravity(), timeInterval) // il setInterval esegue un'azione ogni "timer" millisecondi
     score = 0
@@ -28,10 +29,7 @@ function draw() {
   items.show()
   itemXaxisMovement()
 
-  let r = items.checkWin(item)
-  if(r != -1){
-      items.deleteRow(r)
-  }
+  
 
 }
 

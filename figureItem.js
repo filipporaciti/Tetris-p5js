@@ -19,6 +19,7 @@ class FigureItem{
                 }
             }
         }
+        this.proiection()
     }
 
     randomPattern(){
@@ -53,6 +54,13 @@ class FigureItem{
         }
         
 
+    }
+
+
+    proiection(){
+        // let p = item // hereeeeeeeeee
+        // p.y = 0
+        // p.show
     }
 
     move(direction){    
@@ -131,8 +139,14 @@ class FigureItem{
 
     gravity(){
         if(!this.move('b')){
-            item = new FigureItem(width/2-60, 0)
+
+            items.checkWin(item)
+            
+            item = new FigureItem(spawn, 0)
             items.addItem(item)
+            items.gameOver()
+                
+            
           }
           document.getElementById("score").innerHTML = score
     }
