@@ -1,5 +1,5 @@
-const canvasWidth = 241
-const canvasHeight = 421
+const canvasWidth = side*10 +1
+const canvasHeight = side*15 +1
 //const canvasHeight = 301
 const timeInterval = 900
 
