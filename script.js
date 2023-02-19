@@ -7,6 +7,24 @@ document.getElementById("name-input").value = name
 
 refreshClassifica()
 
+function addClassifica(score){
+    name = document.cookie.split(';')[0].split('=')[1]
+
+
+    let data = {'nome': name, 'score': parseInt(score)}
+
+    fetch('http://93.48.224.122:8080/add_score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(data)
+    })
+        .then((response) => response.json())
+        .then((data) => refreshClassifica())
+
+}
+
 
 function refreshClassifica(){
     

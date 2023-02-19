@@ -20,6 +20,7 @@ class AllItems{
         if(this.collide(item)){
             clearInterval(gameInterval)
             alert('Game Over')
+            addClassifica(score)
             this.reset()
         }
 
