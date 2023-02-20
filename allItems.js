@@ -59,22 +59,52 @@ class AllItems{
     }
 
 
-    moveRowDown(rowDel){
+    moveRowDown(rowDel){ // io faccio andare giu tutto l'item. invece devo far andare giu ogni singolo pezzo
+        let patt = [
+            [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+            [[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+            [[1, 0, 0, 0], [1, 0, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0]],
+            [[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]],
+            [[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+        ]
 
-        for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
-            for(let it of this.items){
-                for(let row=0; row < it.pattern.length; row ++){
-                    for(let col=0; col < it.pattern[row].length; col ++){
-                        if(it.pattern[row][col] == 1){
-    
-                            if(it.y+(row*side) == rowToDel){
-                                it.y += side
-                            }
+
+
+        for(let it of this.items){
+            // for(let row=0; row < it.pattern.length; row ++){
+                // for(let col=0; col < it.pattern[row].length; col ++){
+                    // if(it.pattern[row][col] == 1){
+                    
+
+                    for(let p of patt){ // non conta quanto l'item è girato
+                        if(JSON.stringify(newPatt) == JSON.stringify(p)){
+                            console.log('ci sta')
                         }
                     }
-                }
-            }
+                    
+                    // }
+                // }
+            // }
         }
+        
+
+
+
+
+        // for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
+        //     for(let it of this.items){
+        //         for(let row=0; row < it.pattern.length; row ++){
+        //             for(let col=0; col < it.pattern[row].length; col ++){
+        //                 if(it.pattern[row][col] == 1){
+    
+        //                     if(it.y+(row*side) == rowToDel){
+        //                         it.y += side
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
        
 

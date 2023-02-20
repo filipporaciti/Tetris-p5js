@@ -1,11 +1,11 @@
 
-
 class FigureItem{
     constructor(x, y){
         this.pattern = [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
         this.x = x
         this.y = y
         this.color = {r:200,g:0,b:0}
+        this.angle = 0
         this.randomPattern()
 
     }
@@ -30,9 +30,11 @@ class FigureItem{
             [[[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]], {r:0, g:255, b:230}],
             [[[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], {r:255, g:165, b:0}]
         ]
-        let randomItem = random(patt)
+        // let randomItem = random(patt)
+        let randomItem = patt[3]
         this.pattern = randomItem[0]
         this.color = randomItem[1]
+        this.angle = 0
 
     }
 
@@ -44,16 +46,73 @@ class FigureItem{
             }
         }
 
+
+
+        this.rotatePosizion(1)
+
         let oldPatt = this.pattern // tutto questo solo per il collide
         this.pattern = newPatt // tutto questo solo per il collide
 
         if(this.bottomBlock(newPatt) && this.leftBlock(newPatt, 0) && this.rightBlock(newPatt, 0) && !items.collide(item)){ // lo faccio per evitare che ci siano bug se giri l'item troppo in basso nel bottom
             this.pattern = newPatt
+            this.angle = (this.angle+90) % 360
         }else{
             this.pattern = oldPatt
+            this.rotatePosizion(-1)
+
         }
+
         
 
+    }
+
+    rotatePosizion(mode){
+        if(JSON.stringify(this.color) == JSON.stringify({r:0, g:0, b:255})){
+            if(this.angle == 0){
+                this.x += mode*side
+                this.y -= mode*side
+            }else if(this.angle == 90){
+                this.x -= mode*side
+                this.y -= mode*side
+            }else if(this.angle == 180){
+                this.x -= mode*side
+                this.y += mode*side
+            }else if(this.angle == 270){
+                this.y += mode*side
+                this.x += mode*side
+            }
+        }
+        if(JSON.stringify(this.color) == JSON.stringify({r:255, g:255, b:0})){
+            if(this.angle == 0){
+                this.y -= mode*side*2
+            }else if(this.angle == 90){
+                this.x -= mode*side*2
+            }else if(this.angle == 180){
+                this.y += mode*side*2
+            }else if(this.angle == 270){
+                this.x += mode*side*2
+            }
+        }
+        if(JSON.stringify(this.color) == JSON.stringify({r:0, g:255, b:0})){
+            if(this.angle == 0){
+                this.y -= mode*side*2
+            }else if(this.angle == 90){
+                this.x -= mode*side*2
+                this.y += mode*side
+            }else if(this.angle == 180){
+                this.y += mode*side*2
+            }else if(this.angle == 270){
+                this.x += mode*side*2
+                this.y -= mode*side
+            }
+        }
+        if(JSON.stringify(this.color) == JSON.stringify({r:0, g:255, b:230})){
+            if(this.angle == 0){
+            }else if(this.angle == 90){
+            }else if(this.angle == 180){  // ToDOOOOOOOOOOO
+            }else if(this.angle == 270){
+            }
+        }
     }
 
 
