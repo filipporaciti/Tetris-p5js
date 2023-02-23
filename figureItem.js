@@ -30,8 +30,7 @@ class FigureItem{
             [[[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]], {r:0, g:255, b:230}],
             [[[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], {r:255, g:165, b:0}]
         ]
-        // let randomItem = random(patt)
-        let randomItem = patt[3]
+        let randomItem = random(patt)
         this.pattern = randomItem[0]
         this.color = randomItem[1]
         this.angle = 0
@@ -108,9 +107,28 @@ class FigureItem{
         }
         if(JSON.stringify(this.color) == JSON.stringify({r:0, g:255, b:230})){
             if(this.angle == 0){
+                this.y -= mode*side
             }else if(this.angle == 90){
+                this.x -= mode*side
             }else if(this.angle == 180){  // ToDOOOOOOOOOOO
+                this.y += mode*side
             }else if(this.angle == 270){
+                this.x += mode*side
+            }
+        }
+        if(JSON.stringify(this.color) == JSON.stringify({r:255, g:165, b:0})){
+            if(this.angle == 0){
+                this.x += mode*side
+                this.y -= mode*side*2
+            }else if(this.angle == 90){
+                this.x -= mode*side*2
+                this.y -= mode*side
+            }else if(this.angle == 180){  // ToDOOOOOOOOOOO
+                this.x -= mode*side
+                this.y += mode*side*2
+            }else if(this.angle == 270){
+                this.x += mode*side*2
+                this.y += mode*side
             }
         }
     }

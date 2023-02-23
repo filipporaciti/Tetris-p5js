@@ -60,6 +60,7 @@ class AllItems{
 
 
     moveRowDown(rowDel){ // io faccio andare giu tutto l'item. invece devo far andare giu ogni singolo pezzo
+        console.log('dentro')
         let patt = [
             [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
             [[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
@@ -69,23 +70,35 @@ class AllItems{
         ]
 
 
+        // for(let it of this.items){
+            
+        //     let newPatt = it.pattern.slice() // per fare una copia dell'array
 
-        for(let it of this.items){
-            // for(let row=0; row < it.pattern.length; row ++){
-                // for(let col=0; col < it.pattern[row].length; col ++){
-                    // if(it.pattern[row][col] == 1){
-                    
+        //     for(let i=0; i < 4; i++){
 
-                    for(let p of patt){ // non conta quanto l'item è girato
-                        if(JSON.stringify(newPatt) == JSON.stringify(p)){
-                            console.log('ci sta')
-                        }
+        //         for(let row=0; row < newPatt.length; row ++){
+        //             for(let col=0; col < newPatt[row].length; col ++){
+        //                 newPatt[row][col] = newPatt[col][3-row]
+        //             }
+        //         }
+
+        //         for(let p of patt){
+        //             if (JSON.stringify(p) == JSON.stringify(newPatt)){
+        //                 console.log(p)
+        //             }
+        //         }
+
+
+        //     }
+
+
+                for(let p of patt){
+                    if (JSON.stringify(p) == JSON.stringify(it.pattern)){
+                        console.log(p)
                     }
-                    
-                    // }
-                // }
-            // }
-        }
+                }
+           
+        
         
 
 
@@ -147,7 +160,7 @@ class AllItems{
 
 
         if (multipleDel.length != 0){
-            for (let i of multipleDel) items.deleteRow(i)
+            for (let i of multipleDel) this.deleteRow(i)
         }
     }
 

@@ -1,7 +1,7 @@
 const canvasWidth = side*10 +1
 const canvasHeight = side*15 +1
 //const canvasHeight = 301
-const timeInterval = 90000
+const timeInterval = 800
 
 let item
 let press = false
