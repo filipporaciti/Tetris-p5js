@@ -40,6 +40,7 @@ class AllItems{
 
     deleteRow(rowDel){
 
+
         for(let it of this.items){
             for(let row=0; row < it.pattern.length; row ++){
                 for(let col=0; col < it.pattern[row].length; col ++){
@@ -56,11 +57,12 @@ class AllItems{
         this.show()
         this.moveRowDown(rowDel)
 
+
     }
 
 
     moveRowDown(rowDel){ // io faccio andare giu tutto l'item. invece devo far andare giu ogni singolo pezzo
-        console.log('dentro')
+
         let patt = [
             [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
             [[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
@@ -69,38 +71,48 @@ class AllItems{
             [[1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
         ]
 
+        let noBreakItem = []
 
-        // for(let it of this.items){
-            
-        //     let newPatt = it.pattern.slice() // per fare una copia dell'array
+        for(let it of this.items){
+            let newPatt = it.pattern.slice() // per fare una copia dell'array
+            for(let i=0; i < 4; i++){
+                let checkPatt = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
-        //     for(let i=0; i < 4; i++){
-
-        //         for(let row=0; row < newPatt.length; row ++){
-        //             for(let col=0; col < newPatt[row].length; col ++){
-        //                 newPatt[row][col] = newPatt[col][3-row]
-        //             }
-        //         }
-
-        //         for(let p of patt){
-        //             if (JSON.stringify(p) == JSON.stringify(newPatt)){
-        //                 console.log(p)
-        //             }
-        //         }
-
-
-        //     }
-
-
-                for(let p of patt){
-                    if (JSON.stringify(p) == JSON.stringify(it.pattern)){
-                        console.log(p)
+                for(let row=0; row < newPatt.length; row ++){
+                    for(let col=0; col < newPatt[row].length; col ++){
+                        checkPatt[row][col] = newPatt[col][3-row]
                     }
                 }
-           
-        
-        
 
+                for(let p of patt){
+                    if (JSON.stringify(p) == JSON.stringify(checkPatt)){
+                        noBreakItem.push(it)
+                        i = 5
+                    }else{
+                        newPatt = checkPatt.slice()
+                    }
+                }
+            }
+        }
+
+        // move down if item is no break
+
+
+        // da modificare questa perte. 
+        for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
+            for(let it of noBreakItem){
+                for(let row=0; row < it.pattern.length; row ++){
+                    for(let col=0; col < it.pattern[row].length; col ++){
+                        if(it.pattern[row][col] == 1){
+
+                            if(it.y+(row*side) <= rowToDel){
+                                it.y += side
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 
