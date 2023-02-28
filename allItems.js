@@ -96,41 +96,35 @@ class AllItems{
         }
 
         // move down if item is no break
-
-
-        // da modificare questa perte. 
-        for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
-            for(let it of noBreakItem){
-                for(let row=0; row < it.pattern.length; row ++){
-                    for(let col=0; col < it.pattern[row].length; col ++){
-                        if(it.pattern[row][col] == 1){
-
-                            if(it.y+(row*side) <= rowToDel){
-                                it.y += side
-                            }
+        let s = 0
+        for(let it of noBreakItem){
+            s = side
+            for(let row=0; row < it.pattern.length; row ++){
+                for(let col=0; col < it.pattern[row].length; col ++){
+                    if(it.pattern[row][col] == 1){
+                        if(it.y+(row*side) <= rowDel-side){
+                            it.y += s
+                            s = 0
                         }
                     }
                 }
             }
         }
 
+        // change pattern of item if it's break
 
-
-        // for(let rowToDel=rowDel-side; rowToDel > 0; rowToDel-=side){
-        //     for(let it of this.items){
-        //         for(let row=0; row < it.pattern.length; row ++){
-        //             for(let col=0; col < it.pattern[row].length; col ++){
-        //                 if(it.pattern[row][col] == 1){
-    
-        //                     if(it.y+(row*side) == rowToDel){
-        //                         it.y += side
-        //                     }
-        //                 }
-        //             }
+        // for(let row=0; row < this.pattern.length; row ++){
+        //     for(let col=0; col < this.pattern[row].length; col ++){
+        //         if(this.pattern[row][col] == 1){
+        //             let r = new TetrisRect(this.x+(col*side),this.y+(row*side),this.color)
+        //             r.show()
         //         }
         //     }
         // }
 
+
+
+       
        
 
         
