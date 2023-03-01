@@ -117,41 +117,37 @@ class AllItems{
        
         let rowToDel = []
         let breakItems = []
-        let stringNoBreakItem = []
-        for(let x of noBreakItem){
-            stringNoBreakItem.push(JSON.stringify(x.pattern))
-        }
-        for(let x of this.items){
-            if(!(JSON.stringify(x.pattern) in stringNoBreakItem)){ // provare manualmente questo controllo perchè se no bestemmio
-                breakItems.push(x)
+        
+        for(let it of this.items){
+            let toAdd = true
+            for(let noB of noBreakItem){
+                if(JSON.stringify(it) == JSON.stringify(noB)){
+                    toAdd = false
+                }
+            }
+            if(toAdd){
+                breakItems.push(it)
             }
         }
 
-        /*
+
         for(let it of breakItems){
             for(let row=0; row < it.pattern.length; row ++){
                 for(let col=0; col < it.pattern[row].length; col ++){
                     if(it.pattern[row][col] == 1){
                         if(it.y+(row*side) <= rowDel-side){
-                            rowToDel.push(row)
+                            // row+1
+
+                            // it.pattern[row+1][col] = it.pattern[row][col]
+
+                            it.pattern.pop(row+1)
+                            
 
                         }
                     }
                 }
             }
         }
-        */
-
-        console.log(breakItems)
-        console.log(rowToDel)
-
-
-
-       
-       /*
-      "[[1,1,0,0],[1,1,0,0],[0,0,0,0],[0,0,0,0]]"
-      "[[1,1,0,0],[1,1,0,0],[0,0,0,0],[0,0,0,0]]"
-       */
 
         
 
