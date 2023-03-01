@@ -1,5 +1,5 @@
-const canvasWidth = side*10 +1
-const canvasHeight = side*15 +1
+const canvasWidth = side*6 +1 // 10
+const canvasHeight = side*10 +1 // 15
 //const canvasHeight = 301
 const timeInterval = 800
 
@@ -28,6 +28,7 @@ function draw() {
   background(200);
   items.show()
   itemXaxisMovement()
+  
 
   
 

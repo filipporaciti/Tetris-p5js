@@ -20,7 +20,7 @@ class AllItems{
         if(this.collide(item)){
             clearInterval(gameInterval)
             alert('Game Over')
-            addClassifica(score)
+            //addClassifica(score)
             this.reset()
         }
 
@@ -62,6 +62,7 @@ class AllItems{
 
 
     moveRowDown(rowDel){ // io faccio andare giu tutto l'item. invece devo far andare giu ogni singolo pezzo
+
 
         let patt = [
             [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
@@ -113,19 +114,44 @@ class AllItems{
 
         // change pattern of item if it's break
 
-        // for(let row=0; row < this.pattern.length; row ++){
-        //     for(let col=0; col < this.pattern[row].length; col ++){
-        //         if(this.pattern[row][col] == 1){
-        //             let r = new TetrisRect(this.x+(col*side),this.y+(row*side),this.color)
-        //             r.show()
-        //         }
-        //     }
-        // }
+       
+        let rowToDel = []
+        let breakItems = []
+        let stringNoBreakItem = []
+        for(let x of noBreakItem){
+            stringNoBreakItem.push(JSON.stringify(x.pattern))
+        }
+        for(let x of this.items){
+            if(!(JSON.stringify(x.pattern) in stringNoBreakItem)){ // provare manualmente questo controllo perchè se no bestemmio
+                breakItems.push(x)
+            }
+        }
+
+        /*
+        for(let it of breakItems){
+            for(let row=0; row < it.pattern.length; row ++){
+                for(let col=0; col < it.pattern[row].length; col ++){
+                    if(it.pattern[row][col] == 1){
+                        if(it.y+(row*side) <= rowDel-side){
+                            rowToDel.push(row)
+
+                        }
+                    }
+                }
+            }
+        }
+        */
+
+        console.log(breakItems)
+        console.log(rowToDel)
 
 
 
        
-       
+       /*
+      "[[1,1,0,0],[1,1,0,0],[0,0,0,0],[0,0,0,0]]"
+      "[[1,1,0,0],[1,1,0,0],[0,0,0,0],[0,0,0,0]]"
+       */
 
         
 
