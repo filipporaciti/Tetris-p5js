@@ -12,7 +12,11 @@ let score = 0
 
 let spawn = (canvasWidth-1)/2 - side
 
-
+// touch
+let startX = 0
+let startY = 0
+let touchMov = ''
+let bodyIsBlock = false
 
 
 
@@ -39,23 +43,58 @@ function draw() {
 
 
 
+function touchStarted() {
+  touchMov = ''
+  startX = mouseX
+  startY = mouseY
+  
+}
+
+function touchEnded() {
+
+  if(startX < mouseX && ((mouseX-startX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5)) && bodyIsBlock){
+    touchMov = 'r'
+  }else if(startX >= mouseX && ((startX-mouseX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5)) && bodyIsBlock){
+    touchMov = 'l'
+  }else if(startY < mouseY && ((mouseY-startY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5)) && bodyIsBlock){
+    touchMov = 'b'
+  }else if(startY >= mouseY && ((startY-mouseY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5)) && bodyIsBlock){
+    touchMov = 'u'
+  }else{
+    blockGame()
+  }
+  itemXaxisMovement()
+}
+
+function blockGame(){
+  if((startX > 0 && startX < canvasWidth && startY > 0 && startY < canvasHeight) && (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight)){
+    document.getElementById('id-body').className = 'body-block';
+    bodyIsBlock = true
+  }else{
+    document.getElementById('id-body').className = '';
+    bodyIsBlock = false
+  }
+}
+
+
 
 function itemXaxisMovement(){
-  if(keyIsPressed == true){
+  if(keyIsPressed == true || touchMov != ''){
 
-    if ((key == "ArrowLeft" || key == "a") && !press) {
+    if ((key == "ArrowLeft" || key == "a" || touchMov == 'l') && !press) {
       item.move('l')
     }
-    if ((key == "ArrowRight" || key == "d") && !press) {
+    if ((key == "ArrowRight" || key == "d" || touchMov == 'r') && !press) {
       item.move('r')
     }
-    if ((key == "ArrowDown" || key == "s") && !press) {
+    if ((key == "ArrowDown" || key == "s" || touchMov == 'b') && !press) {
       item.move('b')
     }
-    if ((key == "ArrowUp" || key == "w") && !press) {
+    if ((key == "ArrowUp" || key == "w" || touchMov == 'u') && !press) {
       item.rotateItem()
     }
     press = true
+    touchMov = ''
   }else{
     press = false
   }
