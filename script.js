@@ -67,15 +67,20 @@ function windowChangeStyle(){
     let width = window.innerWidth
     console.log(width)
     if(width < 1100){
-        canvasY = 260
+        canvasY = 150
         document.getElementById('id-score').className = 'score-short';
+        document.getElementById('score').style.display = 'contents';
+        document.getElementById('score').style.float = 'left';
+        document.getElementById('text-score').style.display = 'contents';
         document.getElementById('id-classifica').className = 'classifica-short';
         document.getElementById('id-all-item').className = '';
         document.getElementById('id-info-window').style.display = '';
 
     }else{
         canvasY = 100
-        document.getElementById('id-score').className = 'col-4';
+        document.getElementById('id-score').className = 'col-4 text-center';
+        document.getElementById('score').style.display = '';
+        document.getElementById('text-score').style.display = 'contents';
         document.getElementById('id-classifica').className = 'col-4 float-end';
         document.getElementById('id-all-item').className = 'row';
         document.getElementById('id-info-window').style.display = 'none';
