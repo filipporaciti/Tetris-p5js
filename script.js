@@ -1,7 +1,5 @@
 
 
-document.getElementById('id-game').style.height = "1000";
-document.getElementById('id-game').style.width = "1000";
 
 name = document.cookie.split(';')[0].split('=')[1]
 
@@ -65,10 +63,10 @@ function windowChangeStyle(){
     let width = window.innerWidth
     console.log(width)
     if(width < 1100){
-        document.getElementById('id-score').className = 'row mb-3';
-        document.getElementById('id-game').className = 'row';
-        document.getElementById('id-classifica').className = 'row';
+        canvasY = 180
+        document.getElementById('id-score').className = '';
+        document.getElementById('id-classifica').className = '';
     }else{
-        document.getElementById('id-classifica').className = 'col-4 float-end';
+        document.getElementById('id-classifica').className = '';
     }
 }

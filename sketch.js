@@ -1,7 +1,9 @@
 const canvasWidth = side*10 +1 // 10
 const canvasHeight = side*15 +1 // 15
-//const canvasHeight = 301
+
 const timeInterval = 800
+
+var canvasY = 100
 
 let item
 let press = false
@@ -16,7 +18,7 @@ let spawn = (canvasWidth-1)/2 - side
 
 function setup() {
     let canvas = createCanvas(canvasWidth, canvasHeight);
-    canvas.position(windowWidth/2-width/2, 100)
+    canvas.position(windowWidth/2-width/2, canvasY)
     items = new AllItems()
     item = new FigureItem(spawn, 0)
     items.addItem(item)
@@ -33,17 +35,6 @@ function draw() {
   
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -78,6 +69,6 @@ function itemXaxisMovement(){
 
 function windowResized() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
-  canvas.position(windowWidth/2-width/2, 100)
+  canvas.position(windowWidth/2-width/2, canvasY)
 }
 
