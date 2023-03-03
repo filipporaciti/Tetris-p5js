@@ -132,15 +132,18 @@ class AllItems{
 
 
         for(let it of breakItems){
+            let esci = false
             for(let row=0; row < it.pattern.length; row ++){
                 for(let col=0; col < it.pattern[row].length; col ++){
                     if(it.pattern[row][col] == 1){
                         if(it.y+(row*side) <= rowDel-side){
                             // row+1
 
-                            // it.pattern[row+1][col] = it.pattern[row][col]
-
-                            it.pattern.pop(row+1)
+                            if(!esci){
+                                it.pattern.pop(row+1)
+                                it.pattern.unshift([0,0,0,0])
+                                esci = true
+                            }
                             
 
                         }
