@@ -6,27 +6,13 @@ body{
 }
 
 .score-short{
-   
-
-}
-
-.classifica-long{
-    margin-left: auto; 
-    margin-right: 0;
-    
+   margin: 0px auto;
+   margin-top: 20px;
 
 }
 
 .classifica-short{
-    margin: auto;
-    margin-top: 1000px;
-    background-color: brown;
-
-    
-    
-
-}
-
-.game-short{
-
+    margin: 0px auto;
+    margin-top: 570px;
+    width: min-content;
 }
