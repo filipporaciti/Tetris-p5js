@@ -1,9 +1,13 @@
 
 
+document.getElementById('id-game').style.height = "1000";
+document.getElementById('id-game').style.width = "1000";
+
 name = document.cookie.split(';')[0].split('=')[1]
 
 document.getElementById("name-input").value = name
 
+windowChangeStyle()
 
 refreshClassifica()
 
@@ -50,4 +54,21 @@ function refreshClassifica(){
 
 function nameSave(name){
     document.cookie = "name="+name
+}
+
+onresize = (event) => {
+    windowChangeStyle()
+};
+
+
+function windowChangeStyle(){
+    let width = window.innerWidth
+    console.log(width)
+    if(width < 1100){
+        document.getElementById('id-score').className = 'row mb-3';
+        document.getElementById('id-game').className = 'row';
+        document.getElementById('id-classifica').className = 'row';
+    }else{
+        document.getElementById('id-classifica').className = 'col-4 float-end';
+    }
 }

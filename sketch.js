@@ -52,16 +52,16 @@ function draw() {
 function itemXaxisMovement(){
   if(keyIsPressed == true){
 
-    if (key == "ArrowLeft" && !press) {
+    if ((key == "ArrowLeft" || key == "a") && !press) {
       item.move('l')
     }
-    if (key == "ArrowRight" && !press) {
+    if ((key == "ArrowRight" || key == "d") && !press) {
       item.move('r')
     }
-    if (key == "ArrowDown" && !press) {
+    if ((key == "ArrowDown" || key == "s") && !press) {
       item.move('b')
     }
-    if (key == "ArrowUp" && !press) {
+    if ((key == "ArrowUp" || key == "w") && !press) {
       item.rotateItem()
     }
     press = true
