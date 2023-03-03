@@ -16,7 +16,7 @@ let spawn = (canvasWidth-1)/2 - side
 let startX = 0
 let startY = 0
 let touchMov = ''
-let bodyIsBlock = false
+let bodyIsBlock = true
 
 
 
