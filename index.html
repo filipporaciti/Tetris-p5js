@@ -20,21 +20,24 @@
     <script src="sketch.js" type="text/javascript"></script>
 
     <div class="container-fluid">
+
         <div class="row">
             <h1 class="fs-1 text-center mt-4 mb-1 fw-bold ">Tetris</h1>
         </div>
 
         <div id="id-all-item" class="row">
 
-            <div id="id-score" class="col-4">
-                <p class="fs-3 text-center fw-bold" id="text-score">Score:</p>
-                <p class="fs-4 text-center" id="score">0</p>
-                <p id="id-info-window" style="text-align: center; font-size: 10px;">Cliccare il rettangolo del game per giocare. per uscire dal gioco cliccare fuori dal game</p>
+            <div id="id-score" class="text-center">
+                <p class="float-start mx-2" style="box-sizing: border-box;">Name: <input type="text" id="name-input" style="width: 80px;" onkeyup="nameSave(this.value)" onfocusin="clearInterval(gameInterval)" onfocusout="gameInterval = setInterval(() => snake.moveInterval(), timeInterval)"></p>
+                <p class="fs-4 fw-bold" style="display: contents;" id="text-score">Score:</p>
+                <p class="fs-5 " style="display: contents;" id="score">0</p>
+                <button class="float-end btn btn-info mx-2" onclick="document.location = 'ranking.html'">Classifica</button>
             </div>
+        
 
             <div class="col-4"></div>
 
-            <div id="id-classifica" class="col-4 float-end">
+            <div id="id-classifica" class="col-4 float-end" style="display: none;">
                 <p class="fs-3 text-center fw-bold">Classifica</p>
                 <p class="fs-5" style="box-sizing: border-box;">My name: <input type="text" id="name-input" onchange="nameSave(this.value)"></p>
                 <p>1° <span id="pos-1"></span></p>

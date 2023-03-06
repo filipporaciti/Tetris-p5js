@@ -1,7 +1,5 @@
 let side = 35
 
-
-
 class TetrisRect{
     constructor(x=0, y=0, color={r:0, g:0, b:0}){
         this.x = x

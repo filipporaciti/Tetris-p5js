@@ -1,9 +1,9 @@
-const canvasWidth = side*10 +1 // 10
-const canvasHeight = side*15 +1 // 15
+let canvasWidth = side*10 +1 // 10
+let canvasHeight = side*15 +1 // 15
 
 const timeInterval = 800
 
-var canvasY = 100
+var canvasY = 120
 
 let item
 let press = false
@@ -109,5 +109,6 @@ function itemXaxisMovement(){
 function windowResized() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.position(windowWidth/2-width/2, canvasY)
+
 }
 
