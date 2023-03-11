@@ -2,14 +2,12 @@ body{
     display: flex;
     justify-content: center;
     background-color: coral;
-    
-}
-
-.body-block{
     margin: 0; 
     height: 100%; 
     overflow: hidden
+    
 }
+
 
 .score-short{
    margin: 0px auto;
@@ -17,8 +15,3 @@ body{
    text-align: center;
 }
 
-.classifica-short{
-    margin: 0px auto;
-    margin-top: 570px;
-    width: min-content;
-}

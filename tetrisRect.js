@@ -1,5 +1,12 @@
 let side = 35
 
+if(window.innerHeight<580){
+    side = 25
+}else if(window.innerHeight<650){
+    side = 30
+}
+
+
 class TetrisRect{
     constructor(x=0, y=0, color={r:0, g:0, b:0}){
         this.x = x

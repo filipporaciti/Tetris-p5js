@@ -16,7 +16,6 @@ let spawn = (canvasWidth-1)/2 - side
 let startX = 0
 let startY = 0
 let touchMov = ''
-let bodyIsBlock = true
 
 
 
@@ -52,29 +51,19 @@ function touchStarted() {
 
 function touchEnded() {
 
-  if(startX < mouseX && ((mouseX-startX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5)) && bodyIsBlock){
+  if(startX < mouseX && ((mouseX-startX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5))){
     touchMov = 'r'
-  }else if(startX >= mouseX && ((startX-mouseX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5)) && bodyIsBlock){
+  }else if(startX >= mouseX && ((startX-mouseX) > Math.pow(Math.pow(mouseY-startY, 2), 0.5))){
     touchMov = 'l'
-  }else if(startY < mouseY && ((mouseY-startY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5)) && bodyIsBlock){
+  }else if(startY < mouseY && ((mouseY-startY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5))){
     touchMov = 'b'
-  }else if(startY >= mouseY && ((startY-mouseY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5)) && bodyIsBlock){
+  }else if(startY >= mouseY && ((startY-mouseY) > Math.pow(Math.pow(mouseX-startX, 2), 0.5))){
     touchMov = 'u'
-  }else{
-    blockGame()
   }
   itemXaxisMovement()
 }
 
-function blockGame(){
-  if((startX > 0 && startX < canvasWidth && startY > 0 && startY < canvasHeight) && (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight)){
-    document.getElementById('id-body').className = 'body-block';
-    bodyIsBlock = true
-  }else{
-    document.getElementById('id-body').className = '';
-    bodyIsBlock = false
-  }
-}
+
 
 
 
